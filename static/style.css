@@ -27,6 +27,12 @@ body.light-mode {
     --muted-fg: #525252;
     --border-light: #E5E5E5;
     --inverted-hover: #111111;
+    
+    --border-hairline: 1px solid var(--border-light);
+    --border-thin: 1px solid var(--fg-color);
+    --border-medium: 2px solid var(--fg-color);
+    --border-thick: 4px solid var(--fg-color);
+    --border-ultra: 8px solid var(--fg-color);
 }
 
 * {
