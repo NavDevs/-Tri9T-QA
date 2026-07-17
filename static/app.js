@@ -128,6 +128,12 @@ const genStatus = document.getElementById('generation-status');
 genBtn.addEventListener('click', async () => {
     if (!activeSelectionId) return;
     genBtn.disabled = true;
+    
+    // Add pulsing animation and loading text
+    genBtn.classList.add('loading-pulse');
+    const originalText = genBtn.textContent;
+    genBtn.textContent = 'EXECUTING [ / ]';
+    
     setStatus(genStatus, 'CONTACTING GROQ API (LLAMA-3.3-70B)', 'loading');
     
     try {
@@ -143,6 +149,10 @@ genBtn.addEventListener('click', async () => {
         setStatus(genStatus, 'API FAULT', 'error');
     } finally {
         genBtn.disabled = false;
+        
+        // Remove pulsing animation and restore text
+        genBtn.classList.remove('loading-pulse');
+        genBtn.textContent = originalText;
     }
 });
 

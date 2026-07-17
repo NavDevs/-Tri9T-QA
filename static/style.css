@@ -623,3 +623,15 @@ body.light-mode .inverted .btn-outline:hover:not(:disabled) {
         width: 100%;
     }
 }
+
+/* ================= Loading Animation ================= */
+@keyframes loadingPulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+.loading-pulse {
+    animation: loadingPulse 1s infinite ease-in-out;
+    pointer-events: none;
+}
