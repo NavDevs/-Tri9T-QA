@@ -62,13 +62,12 @@ structured-output schema.
 **Known gaps**: —
 
 ### app/parser.py
-**Status**: NOT STARTED
+**Status**: IN PROGRESS
 **Purpose**: Parses the CT-200 manual PDF into a Node tree (see TRD §3).
 **Public interface**: TBD
 **Depends on**: models.py
 **Depended on by**: main.py
-**Known gaps**: list actual irregularities found here once the real PDF has
-been inspected — do not leave this generic.
+**Known gaps**: Must handle multi-font span breaks (hyphens), out-of-order headings (3.4 before 3.3), size-11 bold headings (2.1.1.1), and cross-page paragraphs.
 
 ### app/versioning.py
 **Status**: NOT STARTED
@@ -98,7 +97,7 @@ nodes and flags staleness + diff at retrieval time (see TRD §7).
 **Known gaps**: text-hash-only limitation from TRD §7 applies.
 
 ### tests/test_parser.py
-**Status**: NOT STARTED
+**Status**: IN PROGRESS
 **Purpose**: Unit tests targeting the ≥3 real irregularities found in the
 manual PDF.
 **Public interface**: —

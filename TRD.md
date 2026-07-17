@@ -55,11 +55,11 @@ against, even after re-ingestion.
 - Extract tables (e.g. General Specifications, Error Codes) via `pdfplumber`
   and attach them as structured content on their parent heading node — never
   drop them.
-- **Irregularities to catalog once the actual PDF is inspected** (fill this in
-  for real, don't leave it generic): duplicate/repeated heading text at
-  different levels, inconsistent numbering, tables spanning a page break,
-  footnotes or callout boxes not part of the heading hierarchy, bold non-heading
-  text that could be misdetected as a heading.
+- **Irregularities found in the PDF**: 
+  1. *Ligatures and multi-font spans*: Words like "CT-200" are split because hyphens use a different font (`NotoSerif-Regular`). Ligatures like `ﬁ` and `ﬀ` are used.
+  2. *Out-of-order numbering*: Section 3.4 appears before 3.3.
+  3. *Inconsistent font sizing*: While H1 is 16.5 and H2 is 12.9, section 2.1.1.1 is size 11.0 (same as body text), distinguished only by being Bold.
+  4. *Cross-page content*: Paragraphs span across page boundaries (e.g., section 3.1).
 - Parser must fail loudly (raise with node context, or log a clearly-flagged
   warning attached to the node) rather than silently mis-parenting when a
   pattern doesn't match.
