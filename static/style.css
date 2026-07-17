@@ -127,12 +127,14 @@ body::after {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    border: none;
+    border: 2px solid var(--fg-color);
     cursor: pointer;
+    transition: all 0ms;
 }
 
 .btn-solid:hover {
-    background: #222;
+    background: var(--bg-color);
+    color: var(--fg-color);
 }
 
 /* ================= Hero Section ================= */
@@ -319,10 +321,11 @@ input[type="text"]::placeholder {
 body.dark-mode .btn-outline {
     background: var(--fg-color);
     color: var(--bg-color);
-    border: none;
+    border: 2px solid var(--fg-color);
 }
 body.dark-mode .btn-outline:hover:not(:disabled) {
-    background: #DDDDDD;
+    background: var(--bg-color);
+    color: var(--fg-color);
 }
 
 /* Search results inside card */
