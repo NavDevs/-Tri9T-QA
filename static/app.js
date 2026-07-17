@@ -113,6 +113,8 @@ createSelBtn.addEventListener('click', async () => {
             setStatus(selStatus, `SELECTION ${data.id} REGISTERED`, 'success');
             genBtn.disabled = false;
             staleBtn.disabled = false;
+        } else {
+            setStatus(selStatus, `SYSTEM FAULT: ${data.detail || 'UNKNOWN'}`, 'error');
         }
     } catch (err) {
         setStatus(selStatus, 'INITIALIZATION FAULT', 'error');
