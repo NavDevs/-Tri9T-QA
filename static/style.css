@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap');
 
 :root {
-    --bg-color: #FFFFFF;
-    --fg-color: #000000;
-    --muted: #F5F5F5;
-    --muted-fg: #525252;
-    --border-light: #E5E5E5;
+    --bg-color: #000000;
+    --fg-color: #FFFFFF;
+    --muted: #111111;
+    --muted-fg: #A3A3A3;
+    --border-light: #333333;
     
     --font-display: "Inter", -apple-system, sans-serif;
     --font-body: "Inter", -apple-system, sans-serif;
@@ -17,16 +17,16 @@
     --border-thick: 4px solid var(--fg-color);
     --border-ultra: 8px solid var(--fg-color);
     
-    --inverted-hover: #111111;
+    --inverted-hover: #EEEEEE;
 }
 
-body.dark-mode {
-    --bg-color: #000000;
-    --fg-color: #FFFFFF;
-    --muted: #111111;
-    --muted-fg: #A3A3A3;
-    --border-light: #333333;
-    --inverted-hover: #EEEEEE;
+body.light-mode {
+    --bg-color: #FFFFFF;
+    --fg-color: #000000;
+    --muted: #F5F5F5;
+    --muted-fg: #525252;
+    --border-light: #E5E5E5;
+    --inverted-hover: #111111;
 }
 
 * {
@@ -246,23 +246,25 @@ body::after {
     background: var(--muted);
 }
 
+/* Inverted Card (Dark Mode Default) */
 .feature-card.inverted {
-    background: var(--fg-color);
-    color: var(--bg-color);
-}
-
-.feature-card.inverted:hover {
-    background: var(--inverted-hover);
-}
-
-body.dark-mode .feature-card.inverted {
     background: transparent;
     color: var(--fg-color);
     border: var(--border-thick);
 }
 
-body.dark-mode .feature-card.inverted:hover {
+.feature-card.inverted:hover {
     background: var(--muted);
+}
+
+body.light-mode .feature-card.inverted {
+    background: var(--fg-color);
+    color: var(--bg-color);
+    border: var(--border-thin);
+}
+
+body.light-mode .feature-card.inverted:hover {
+    background: var(--inverted-hover);
 }
 
 .card-title {
@@ -294,10 +296,11 @@ input[type="text"]::placeholder {
     color: var(--muted-fg);
 }
 
+/* Default (Dark Mode) Outline Buttons */
 .btn-outline {
-    background: transparent;
-    border: var(--border-medium);
-    color: inherit;
+    background: var(--fg-color);
+    color: var(--bg-color);
+    border: 2px solid var(--fg-color);
     padding: 0.75rem 1.5rem;
     font-family: var(--font-mono);
     font-weight: 700;
@@ -309,10 +312,21 @@ input[type="text"]::placeholder {
 }
 
 .btn-outline:hover:not(:disabled) {
+    background: var(--bg-color);
+    color: var(--fg-color);
+}
+
+/* Light Mode Outline Buttons Override */
+body.light-mode .btn-outline {
+    background: transparent;
+    color: inherit;
+}
+
+body.light-mode .btn-outline:hover:not(:disabled) {
     background: var(--fg-color);
     color: var(--bg-color);
 }
-.inverted .btn-outline:hover:not(:disabled) {
+body.light-mode .inverted .btn-outline:hover:not(:disabled) {
     background: var(--bg-color);
     color: var(--fg-color);
 }
@@ -320,17 +334,6 @@ input[type="text"]::placeholder {
 .btn-outline:disabled {
     opacity: 0.3;
     cursor: not-allowed;
-}
-
-/* Make buttons solid white in dark theme as requested */
-body.dark-mode .btn-outline {
-    background: var(--fg-color);
-    color: var(--bg-color);
-    border: 2px solid var(--fg-color);
-}
-body.dark-mode .btn-outline:hover:not(:disabled) {
-    background: var(--bg-color);
-    color: var(--fg-color);
 }
 
 /* Search results inside card */
