@@ -70,10 +70,10 @@ structured-output schema.
 **Known gaps**: Must handle multi-font span breaks (hyphens), out-of-order headings (3.4 before 3.3), size-11 bold headings (2.1.1.1), and cross-page paragraphs.
 
 ### app/versioning.py
-**Status**: NOT STARTED
+**Status**: DONE
 **Purpose**: Cross-version node matching (logical_node_id + fuzzy fallback)
 and diff generation (see TRD §4).
-**Public interface**: TBD
+**Public interface**: `generate_diff`, `match_versions`
 **Depends on**: models.py
 **Depended on by**: main.py, staleness.py
 **Known gaps**: known failure modes from TRD §4 apply here directly.
@@ -106,7 +106,7 @@ manual PDF.
 **Known gaps**: —
 
 ### tests/test_versioning.py
-**Status**: NOT STARTED
+**Status**: DONE
 **Purpose**: Tests for node matching across v1/v2, including a known
 failure-mode case.
 **Depends on**: app/versioning.py

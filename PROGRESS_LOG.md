@@ -21,3 +21,8 @@ This log tracks the implementation steps, verified actions, and deviations from 
 - **Attempted**: Created `app/nosql.py` to handle TinyDB setup. Exported helper functions for inserting and retrieving generations by selection or node.
 - **Verified**: Syntax checked via flake8 / manual review.
 - **Deviations**: None.
+
+## Step 4: Versioning
+- **Attempted**: Installed `rapidfuzz` and updated `requirements.txt`. Created `app/versioning.py` logic to match nodes across versions using `logical_node_id` primary and fuzzy match fallback, and computing diffs. Created `tests/test_versioning.py` to cover matched, unchanged, changed with low confidence fallback, and added nodes.
+- **Verified**: `pytest tests/test_versioning.py` passes completely.
+- **Deviations**: None.
