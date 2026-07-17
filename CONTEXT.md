@@ -28,9 +28,9 @@ in TRD §8.
 **Known gaps**: —
 
 ### app/database.py
-**Status**: NOT STARTED
+**Status**: DONE
 **Purpose**: SQLAlchemy engine + session setup for the SQLite store.
-**Public interface**: TBD
+**Public interface**: `engine`, `SessionLocal`, `Base`, `get_db()`
 **Depends on**: —
 **Depended on by**: models.py, main.py
 **Known gaps**: —
@@ -44,10 +44,10 @@ in TRD §8.
 **Known gaps**: —
 
 ### app/models.py
-**Status**: NOT STARTED
+**Status**: DONE
 **Purpose**: SQLAlchemy ORM models — DocumentVersion, Node, Selection,
 SelectionNode (see TRD §2).
-**Public interface**: TBD
+**Public interface**: `DocumentVersion`, `Node`, `Selection`, `selection_node`
 **Depends on**: database.py
 **Depended on by**: parser.py, versioning.py, staleness.py, main.py
 **Known gaps**: —
