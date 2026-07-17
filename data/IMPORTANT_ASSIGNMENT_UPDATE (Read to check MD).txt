@@ -1,0 +1,21 @@
+⚠️ Important Assignment Update
+
+Please read this update before starting or continuing the assignment.
+
+The assignment document refers to parsing a Markdown (.md) file. For
+this assignment, you should instead work directly with the provided PDF
+document.
+
+Your task is to build a parsing pipeline that extracts the document
+while preserving its hierarchical structure, including headings,
+sections, subsections, lists, tables, and other structural elements,
+using appropriate PDF parsing and/or OCR techniques.
+
+The objective is to reconstruct the document hierarchy as accurately as
+possible from the PDF, similar to processing real-world engineering and
+regulatory documents.
+
+You are free to use the tools, libraries, and approach that you consider
+most appropriate.
+
+We wish you all the best with your assignment!
