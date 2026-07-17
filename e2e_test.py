@@ -37,8 +37,8 @@ def run():
     output.append(f"Status: {res.status_code}, Response: {res.json()}")
     
     # 3. Find Node
-    output.append("\n== 2. SEARCHING FOR LIMIT ==")
-    res = client.get("/search?q=limit")
+    output.append("\n== 2. SEARCHING FOR BATTERY LIFE ==")
+    res = client.get("/search?q=battery life")
     nodes = res.json()
     node = nodes[0] if nodes else None
     output.append(f"Found node ID: {node['id']}, Heading: {node['heading']}, Logical ID: {node['logical_node_id']}")
@@ -69,7 +69,7 @@ def run():
     
     # 8. Check Diff
     output.append("\n== 7. CHECKING NODE DIFF ==")
-    res = client.get(f"/search?q=cuff")
+    res = client.get(f"/search?q=battery life")
     new_nodes = res.json()
     # Find the matching node by logical_node_id
     new_node = next((n for n in new_nodes if n["logical_node_id"] == node["logical_node_id"]), new_nodes[0])
@@ -87,7 +87,7 @@ def run():
     
     artifact_path = "C:/Users/huesh/.gemini/antigravity/brain/358daff4-67f5-4434-ae22-5b5cffa8f634/walkthrough.md"
     os.makedirs(os.path.dirname(artifact_path), exist_ok=True)
-    with open(artifact_path, "w") as f:
+    with open(artifact_path, "w", encoding="utf-8") as f:
         f.write("# API Flow E2E Walkthrough\n\n")
         f.write("This document demonstrates the full lifecycle from document ingestion to testing and staleness detection.\n\n")
         f.write("```text\n")
