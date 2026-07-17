@@ -138,7 +138,7 @@ body::after {
 /* ================= Hero Section ================= */
 .hero {
     max-width: 64rem;
-    margin: 6rem auto;
+    margin: 3rem auto 6rem;
     padding: 0 2rem;
     text-align: left;
 }
