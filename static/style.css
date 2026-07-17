@@ -315,6 +315,16 @@ input[type="text"]::placeholder {
     cursor: not-allowed;
 }
 
+/* Make buttons solid white in dark theme as requested */
+body.dark-mode .btn-outline {
+    background: var(--fg-color);
+    color: var(--bg-color);
+    border: none;
+}
+body.dark-mode .btn-outline:hover:not(:disabled) {
+    background: #DDDDDD;
+}
+
 /* Search results inside card */
 .result-list {
     list-style: none;
