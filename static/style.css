@@ -60,13 +60,18 @@ body::after {
 
 /* ================= Navbar ================= */
 .navbar {
+    border-bottom: var(--border-thin);
+    position: relative;
+    z-index: 10;
+}
+
+.nav-container {
+    max-width: 72rem;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 2rem;
-    border-bottom: var(--border-thin);
-    position: relative;
-    z-index: 10;
 }
 
 .nav-left {
