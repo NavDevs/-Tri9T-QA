@@ -9,28 +9,8 @@ function setStatus(element, msg, type) {
 }
 
 // --- 1. Upload Logic ---
-const uploadZone = document.getElementById('upload-zone');
 const fileInput = document.getElementById('pdf-upload');
 const uploadStatus = document.getElementById('upload-status');
-
-uploadZone.addEventListener('click', () => fileInput.click());
-
-uploadZone.addEventListener('dragover', (e) => {
-    e.preventDefault();
-    uploadZone.classList.add('dragover');
-});
-
-uploadZone.addEventListener('dragleave', () => {
-    uploadZone.classList.remove('dragover');
-});
-
-uploadZone.addEventListener('drop', (e) => {
-    e.preventDefault();
-    uploadZone.classList.remove('dragover');
-    if (e.dataTransfer.files.length) {
-        handleUpload(e.dataTransfer.files[0]);
-    }
-});
 
 fileInput.addEventListener('change', (e) => {
     if (e.target.files.length) {

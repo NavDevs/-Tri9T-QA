@@ -7,80 +7,91 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <div class="app-container">
-        <header>
-            <h1 class="text-8xl">QA Engine</h1>
-            <div class="section-header">
-                <div class="square-bullet"></div>
-                <p class="mono-label">Automated test case generation & staleness detection</p>
+    <!-- Top Navigation -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <div class="nav-logo-box">T</div>
+            <span class="nav-brand">Tri9T QA</span>
+        </div>
+        <div class="nav-center">
+            <a href="#ingest-card" class="nav-link">INGEST</a>
+            <a href="#search-card" class="nav-link">SEARCH</a>
+            <a href="#select-card" class="nav-link">SELECT</a>
+        </div>
+        <div class="nav-right">
+            <a href="#" class="nav-link">LOG IN</a>
+            <button class="btn-solid">SIGN UP</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Photo 1 Match) -->
+    <header class="hero">
+        <div class="hero-label">
+            <div class="square-bullet"></div>
+            SYSTEM ACTIVE
+        </div>
+        
+        <h1 class="hero-title">
+            Transform the way<br>
+            your <span class="accent-wrapper">QA works<div class="accent-underline"></div><div class="accent-square"></div></span>
+        </h1>
+    </header>
+
+    <!-- App Grid Section (Photo 2 Match) -->
+    <section class="app-section">
+        <h2 class="section-title">Core Engine</h2>
+        <p class="section-subtitle">Intelligent parsing, matching, and generation</p>
+        
+        <div class="feature-grid">
+            
+            <!-- Ingest Card (Inverted like StarterApp) -->
+            <div class="feature-card inverted" id="ingest-card">
+                <h3 class="card-title">1. Document Ingest</h3>
+                <p style="color: #a3a3a3; margin-bottom: 2rem;">Upload the product manual (PDF) to build the versioned structural tree.</p>
+                <input type="file" id="pdf-upload" accept="application/pdf" hidden>
+                <div id="upload-status" class="status-msg" style="margin-bottom: 1rem;"></div>
+                <button class="btn-outline" id="upload-btn" onclick="document.getElementById('pdf-upload').click()">Upload PDF</button>
             </div>
-        </header>
 
-        <hr class="ultra">
-
-        <main>
-            <section id="ingest-section">
-                <div class="section-header">
-                    <div class="square-bullet"></div>
-                    <h2 class="text-4xl">1. Ingest Manual</h2>
-                </div>
-                <div class="upload-zone" id="upload-zone">
-                    <p class="display-font" style="font-size: 2rem;">Drag & Drop PDF Document</p>
-                    <p class="mono-label" style="margin-top: 1rem;">Or click to browse files</p>
-                    <input type="file" id="pdf-upload" accept="application/pdf" hidden>
-                </div>
-                <div id="upload-status" class="status-msg"></div>
-            </section>
-
-            <hr class="thick">
-
-            <section id="search-section">
-                <div class="section-header">
-                    <div class="square-bullet"></div>
-                    <h2 class="text-4xl">2. Isolate Node</h2>
-                </div>
-                <div class="input-group">
-                    <input type="text" id="search-input" placeholder="Enter keyword (e.g., 'battery')">
-                    <button id="search-btn">Query</button>
-                </div>
+            <!-- Search Card -->
+            <div class="feature-card" id="search-card">
+                <h3 class="card-title">2. Isolate Node</h3>
+                <input type="text" id="search-input" placeholder="Search headings (e.g. 'battery')">
                 <ul id="search-results" class="result-list"></ul>
-            </section>
+                <button class="btn-outline" id="search-btn">Query Database</button>
+            </div>
 
-            <hr class="thick">
+            <!-- Select Card -->
+            <div class="feature-card" id="select-card">
+                <h3 class="card-title">3. Create Selection</h3>
+                <input type="text" id="selection-name" placeholder="Selection Name">
+                <div id="selection-status" class="status-msg" style="margin-bottom: 1rem;"></div>
+                <button class="btn-outline" id="create-selection-btn" disabled>Initialize Selection</button>
+            </div>
 
-            <section id="selection-section">
-                <div class="section-header">
-                    <div class="square-bullet"></div>
-                    <h2 class="text-4xl">3. Define Selection</h2>
-                </div>
-                <div class="input-group">
-                    <input type="text" id="selection-name" placeholder="Selection Name">
-                    <button id="create-selection-btn" disabled>Initialize</button>
-                </div>
-                <div id="selection-status" class="status-msg"></div>
-            </section>
+        </div>
 
-            <hr class="ultra">
+        <!-- Generation Layout -->
+        <hr style="border: none; border-top: var(--border-thin); margin: 4rem 0;">
+        
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem;">
+            <div>
+                <h2 class="section-title" style="text-align: left; margin-bottom: 0.5rem;">4. Test Generation</h2>
+                <p style="color: var(--muted-fg);">Execute LLM to generate or audit QA scenarios</p>
+            </div>
+            <div style="display: flex; gap: 1rem;">
+                <button class="btn-outline" id="check-staleness-btn" disabled>Audit Staleness</button>
+                <button class="btn-solid" id="generate-btn" disabled>Execute LLM</button>
+            </div>
+        </div>
+        
+        <div id="generation-status" class="status-msg" style="margin-bottom: 2rem; font-weight: 700;"></div>
+        
+        <div id="test-cases-container" class="test-cases-wrapper">
+            <!-- Test cases injected here -->
+        </div>
 
-            <section id="generation-section">
-                <div class="section-header">
-                    <div class="square-bullet"></div>
-                    <h2 class="text-4xl">4. Generate Tests</h2>
-                </div>
-                
-                <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
-                    <button id="generate-btn" disabled>Execute LLM Generation</button>
-                    <button id="check-staleness-btn" disabled>Audit Staleness</button>
-                </div>
-                
-                <div id="generation-status" class="status-msg"></div>
-                
-                <div id="test-cases-container" class="cards-container">
-                    <!-- Test cases injected here -->
-                </div>
-            </section>
-        </main>
-    </div>
+    </section>
 
     <script src="/static/app.js"></script>
 </body>
