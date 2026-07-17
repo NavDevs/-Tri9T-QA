@@ -36,9 +36,9 @@ in TRD §8.
 **Known gaps**: —
 
 ### app/nosql.py
-**Status**: NOT STARTED
+**Status**: DONE
 **Purpose**: TinyDB setup/access for storing LLM-generated test cases.
-**Public interface**: TBD
+**Public interface**: `insert_generation`, `get_generation_by_id`, `get_generations_by_selection`, `get_generations_by_node`
 **Depends on**: —
 **Depended on by**: llm.py, staleness.py, main.py
 **Known gaps**: —

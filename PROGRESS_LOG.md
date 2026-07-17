@@ -16,3 +16,8 @@ This log tracks the implementation steps, verified actions, and deviations from 
 - **Attempted**: Created `app/parser.py` using `PyMuPDF` and `pdfplumber` to extract structured text and tables. Wrote `tests/test_parser.py` targeting ligatures, split words (hyphens), inconsistent font sizing, out-of-order numbering, and cross-page spans.
 - **Verified**: `pytest tests/test_parser.py` passes completely.
 - **Deviations**: Replaced pure `level` detection based on font size with regex heading detection `^\d+(?:\.\d+)*`, because the 2.1.1.1 heading uses size 11.0 (same as body text), making font-size alone unreliable as requested in the assignment context.
+
+## Step 3: TinyDB Setup
+- **Attempted**: Created `app/nosql.py` to handle TinyDB setup. Exported helper functions for inserting and retrieving generations by selection or node.
+- **Verified**: Syntax checked via flake8 / manual review.
+- **Deviations**: None.
