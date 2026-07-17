@@ -36,3 +36,8 @@ This log tracks the implementation steps, verified actions, and deviations from 
 - **Attempted**: Created `app/staleness.py` to compare source node hashes from generations against the latest document version. Included generation of unified diffs on modification. Created `tests/test_staleness.py` with mocked DB sessions to test unchanged and changed scenarios.
 - **Verified**: `pytest tests/test_staleness.py` passes completely.
 - **Deviations**: Noted the text-hash-only limitation directly in `app/staleness.py` docstring as requested by TRD §7.
+
+## Step 7: API Endpoints (main.py)
+- **Attempted**: Installed `python-multipart` to support file uploads. Created `app/main.py` using FastAPI to wire all endpoints (`/ingest`, `/nodes`, `/search`, `/nodes/{id}/diff`, `/selections`, `/generate`, `/test-cases`) integrating all previous modules as specified in TRD §8.
+- **Verified**: Confirmed syntax correctness via manual module import.
+- **Deviations**: None.
