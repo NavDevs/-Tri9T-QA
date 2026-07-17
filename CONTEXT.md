@@ -88,10 +88,10 @@ LLM, validates/retries on malformed output (see TRD §5).
 **Known gaps**: —
 
 ### app/staleness.py
-**Status**: NOT STARTED
+**Status**: DONE
 **Purpose**: Recomputes current content hashes for a generation's source
 nodes and flags staleness + diff at retrieval time (see TRD §7).
-**Public interface**: TBD
+**Public interface**: `check_staleness`
 **Depends on**: models.py, nosql.py
 **Depended on by**: main.py
 **Known gaps**: text-hash-only limitation from TRD §7 applies.
@@ -112,7 +112,7 @@ failure-mode case.
 **Depends on**: app/versioning.py
 
 ### tests/test_staleness.py
-**Status**: NOT STARTED
+**Status**: DONE
 **Purpose**: Tests that a changed node correctly flags its generations stale
 and an unchanged node does not.
 **Depends on**: app/staleness.py

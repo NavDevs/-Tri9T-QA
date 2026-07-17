@@ -31,3 +31,8 @@ This log tracks the implementation steps, verified actions, and deviations from 
 - **Attempted**: Created `app/schemas.py` for API requests/responses and LLM output parsing. Created `app/llm.py` with `generate_test_cases` containing the prompt and fallback retry logic (as specified in TRD §5) using `google-genai`.
 - **Verified**: Confirmed syntax correctness via manual module import.
 - **Deviations**: None.
+
+## Step 6: Staleness Detection
+- **Attempted**: Created `app/staleness.py` to compare source node hashes from generations against the latest document version. Included generation of unified diffs on modification. Created `tests/test_staleness.py` with mocked DB sessions to test unchanged and changed scenarios.
+- **Verified**: `pytest tests/test_staleness.py` passes completely.
+- **Deviations**: Noted the text-hash-only limitation directly in `app/staleness.py` docstring as requested by TRD §7.
