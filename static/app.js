@@ -65,16 +65,16 @@ searchBtn.addEventListener('click', async () => {
             const li = document.createElement('li');
             li.className = 'result-item';
             
-            const textSpan = document.createElement('span');
-            textSpan.className = 'display-font';
-            textSpan.textContent = node.heading;
+            const textDiv = document.createElement('div');
+            textDiv.className = 'result-heading display-font';
+            textDiv.textContent = node.heading;
             
-            const idSpan = document.createElement('span');
-            idSpan.className = 'mono-label';
-            idSpan.textContent = node.logical_node_id;
+            const idDiv = document.createElement('div');
+            idDiv.className = 'result-id mono-label';
+            idDiv.textContent = 'NODE ID: ' + node.logical_node_id;
             
-            li.appendChild(textSpan);
-            li.appendChild(idSpan);
+            li.appendChild(textDiv);
+            li.appendChild(idDiv);
             
             li.addEventListener('click', () => {
                 document.querySelectorAll('.result-item').forEach(el => el.classList.remove('selected'));

@@ -370,21 +370,52 @@ body.light-mode .inverted .btn-outline:hover:not(:disabled) {
 .result-list {
     list-style: none;
     margin-bottom: 1.5rem;
-    max-height: 150px;
+    max-height: 180px;
     overflow-y: auto;
+    border: var(--border-thin);
+    border-radius: 4px;
 }
 
 .result-item {
-    padding: 0.5rem 0;
+    padding: 0.75rem 1rem;
     border-bottom: var(--border-hairline);
     cursor: pointer;
+    transition: all 0ms; /* Instant transition for monochrome theme */
+}
+
+.result-item:last-child {
+    border-bottom: none;
+}
+
+.result-item .result-heading {
     font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--fg-color);
 }
-.result-item.selected {
-    font-weight: 700;
+
+.result-item .result-id {
+    font-size: 0.65rem;
+    color: var(--muted-fg);
 }
+
 .result-item:hover {
-    padding-left: 0.5rem;
+    background: var(--fg-color);
+}
+
+.result-item:hover .result-heading,
+.result-item:hover .result-id {
+    color: var(--bg-color);
+}
+
+.result-item.selected {
+    background: var(--fg-color);
+    border-left: 4px solid var(--bg-color); /* To distinguish from hover */
+}
+
+.result-item.selected .result-heading,
+.result-item.selected .result-id {
+    color: var(--bg-color);
 }
 
 /* Status messages */
