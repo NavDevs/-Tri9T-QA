@@ -56,27 +56,41 @@
             
             <!-- Ingest Card (Inverted like StarterApp) -->
             <div class="feature-card inverted" id="ingest-card">
-                <h3 class="card-title">1. Document Ingest</h3>
-                <p style="color: #a3a3a3; margin-bottom: 2rem;">Upload the product manual (PDF) to build the versioned structural tree.</p>
-                <input type="file" id="pdf-upload" accept="application/pdf" hidden>
-                <div id="upload-status" class="status-msg" style="margin-bottom: 1rem;"></div>
-                <button class="btn-outline" id="upload-btn" onclick="document.getElementById('pdf-upload').click()">Upload PDF</button>
+                <div class="card-header">
+                    <h3 class="card-title">1. Document Ingest</h3>
+                    <p class="card-desc">Upload the product manual (PDF) to build the versioned structural tree.</p>
+                </div>
+                <div class="card-body">
+                    <input type="file" id="pdf-upload" accept="application/pdf" hidden>
+                    <div id="upload-status" class="status-msg" style="margin-bottom: 1rem;"></div>
+                    <button class="btn-outline" id="upload-btn" onclick="document.getElementById('pdf-upload').click()">Upload PDF</button>
+                </div>
             </div>
 
             <!-- Search Card -->
             <div class="feature-card" id="search-card">
-                <h3 class="card-title">2. Isolate Node</h3>
-                <input type="text" id="search-input" placeholder="Search headings (e.g. 'battery')">
-                <ul id="search-results" class="result-list"></ul>
-                <button class="btn-outline" id="search-btn">Query Database</button>
+                <div class="card-header">
+                    <h3 class="card-title">2. Isolate Node</h3>
+                    <p class="card-desc">Search the structural tree to isolate a specific context node.</p>
+                </div>
+                <div class="card-body">
+                    <input type="text" id="search-input" placeholder="Search headings (e.g. 'battery')">
+                    <ul id="search-results" class="result-list"></ul>
+                    <button class="btn-outline" id="search-btn">Query Database</button>
+                </div>
             </div>
 
             <!-- Select Card -->
             <div class="feature-card" id="select-card">
-                <h3 class="card-title">3. Create Selection</h3>
-                <input type="text" id="selection-name" placeholder="Selection Name">
-                <div id="selection-status" class="status-msg" style="margin-bottom: 1rem;"></div>
-                <button class="btn-outline" id="create-selection-btn" disabled>Initialize Selection</button>
+                <div class="card-header">
+                    <h3 class="card-title">3. Create Selection</h3>
+                    <p class="card-desc">Lock the isolated node as the context window for test generation.</p>
+                </div>
+                <div class="card-body">
+                    <input type="text" id="selection-name" placeholder="Selection Name">
+                    <div id="selection-status" class="status-msg" style="margin-bottom: 1rem;"></div>
+                    <button class="btn-outline" id="create-selection-btn" disabled>Initialize Selection</button>
+                </div>
             </div>
 
         </div>
