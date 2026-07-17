@@ -53,10 +53,10 @@ SelectionNode (see TRD §2).
 **Known gaps**: —
 
 ### app/schemas.py
-**Status**: NOT STARTED
+**Status**: DONE
 **Purpose**: Pydantic request/response models for the API, plus the LLM
 structured-output schema.
-**Public interface**: TBD
+**Public interface**: `TestCase`, `TestCaseList`, `NodeResponse`, `SelectionRequest`, `SelectionResponse`, `DiffResponse`, `GenerationResponse`
 **Depends on**: —
 **Depended on by**: main.py, llm.py
 **Known gaps**: —
@@ -79,10 +79,10 @@ and diff generation (see TRD §4).
 **Known gaps**: known failure modes from TRD §4 apply here directly.
 
 ### app/llm.py
-**Status**: NOT STARTED
+**Status**: DONE
 **Purpose**: Builds the prompt from a selection's reconstructed text, calls the
 LLM, validates/retries on malformed output (see TRD §5).
-**Public interface**: TBD
+**Public interface**: `generate_test_cases`
 **Depends on**: schemas.py, nosql.py
 **Depended on by**: main.py
 **Known gaps**: —

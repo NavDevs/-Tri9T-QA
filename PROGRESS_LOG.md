@@ -26,3 +26,8 @@ This log tracks the implementation steps, verified actions, and deviations from 
 - **Attempted**: Installed `rapidfuzz` and updated `requirements.txt`. Created `app/versioning.py` logic to match nodes across versions using `logical_node_id` primary and fuzzy match fallback, and computing diffs. Created `tests/test_versioning.py` to cover matched, unchanged, changed with low confidence fallback, and added nodes.
 - **Verified**: `pytest tests/test_versioning.py` passes completely.
 - **Deviations**: None.
+
+## Step 5: Schemas and LLM Integration
+- **Attempted**: Created `app/schemas.py` for API requests/responses and LLM output parsing. Created `app/llm.py` with `generate_test_cases` containing the prompt and fallback retry logic (as specified in TRD §5) using `google-genai`.
+- **Verified**: Confirmed syntax correctness via manual module import.
+- **Deviations**: None.
