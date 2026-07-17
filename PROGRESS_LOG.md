@@ -41,3 +41,8 @@ This log tracks the implementation steps, verified actions, and deviations from 
 - **Attempted**: Installed `python-multipart` to support file uploads. Created `app/main.py` using FastAPI to wire all endpoints (`/ingest`, `/nodes`, `/search`, `/nodes/{id}/diff`, `/selections`, `/generate`, `/test-cases`) integrating all previous modules as specified in TRD §8.
 - **Verified**: Confirmed syntax correctness via manual module import.
 - **Deviations**: None.
+
+## Step 8: E2E Test
+- **Attempted**: Created `e2e_test.py` utilizing `fastapi.testclient.TestClient` to test the complete lifecycle: ingest v1 -> create selection -> generate test cases -> ingest v2 -> detect staleness -> get diff. Generated `walkthrough.md` documenting this flow.
+- **Verified**: E2E script ran successfully and generated the walkthrough document as requested.
+- **Deviations**: LLM call was mocked in the test script to prevent dependency on actual API key during automated test runs.
