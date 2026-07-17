@@ -234,6 +234,52 @@ body::after {
     margin-top: 2rem;
 }
 
+/* ================= Architecture Section ================= */
+.architecture-section {
+    max-width: 64rem;
+    margin: 2rem auto 6rem;
+    padding: 0 2rem;
+}
+
+.arch-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    color: var(--fg-color);
+}
+
+.arch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.arch-card {
+    border-top: var(--border-thin);
+    padding-top: 1.5rem;
+}
+
+.arch-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--fg-color);
+}
+
+.arch-card p {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--muted-fg);
+}
+
+.arch-card p strong {
+    color: var(--fg-color);
+    border: 1px solid currentColor;
+    padding: 0.1rem 0.3rem;
+    font-size: 0.75rem;
+    margin: 0 0.2rem;
+}
+
 /* ================= App Grid Layout (Photo 2) ================= */
 .app-section {
     max-width: 72rem;

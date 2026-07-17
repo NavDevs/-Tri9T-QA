@@ -48,6 +48,25 @@
         </div>
     </header>
 
+    <!-- Architecture Breakdown Section -->
+    <section class="architecture-section">
+        <h2 class="arch-title">Technical Architecture</h2>
+        <div class="arch-grid">
+            <div class="arch-card">
+                <h3>1. Dynamic PDF Ingestion</h3>
+                <p>Built for real-world FDA/ISO workflows, this engine processes raw, unstructured PDFs rather than plain Markdown. It dynamically reconstructs the engineering requirement hierarchy by running heuristics on bytecode font sizing and layout.</p>
+            </div>
+            <div class="arch-card">
+                <h3>2. RAG & Context Locking</h3>
+                <p>Leverages a hybrid SQL (SQLite) and NoSQL (TinyDB) approach. It builds a versioned structural tree, allowing users to run targeted searches to isolate specific requirement nodes and lock them in as a strict context window for the LLM.</p>
+            </div>
+            <div class="arch-card">
+                <h3>3. Staleness Auditing</h3>
+                <p>Implements robust version control. If a new version of a product manual is uploaded, the system computes SHA-256 hashes of the tree nodes to instantly flag older test cases as <strong>[ STALE ]</strong> if their source requirement was altered.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- App Grid Section (Photo 2 Match) -->
     <section class="app-section">
         <h2 class="section-title">Core Engine</h2>
