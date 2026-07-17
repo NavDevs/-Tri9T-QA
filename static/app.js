@@ -1,6 +1,11 @@
 let selectedNodeId = null;
 let activeSelectionId = null;
 
+// --- Theme Toggle ---
+document.getElementById('theme-toggle').addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+});
+
 // Helper to set status message classes
 function setStatus(element, msg, type) {
     element.textContent = msg;
