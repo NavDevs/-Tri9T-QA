@@ -204,6 +204,36 @@ body::after {
     background-color: var(--bg-color);
 }
 
+.hero-description {
+    margin-top: 3rem;
+    max-width: 48rem;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--muted-fg);
+}
+
+.hero-description strong {
+    color: var(--fg-color);
+    font-weight: 600;
+}
+
+.hero-description p {
+    margin-bottom: 1.5rem;
+}
+
+.usage-steps {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-top: var(--border-thin);
+    padding-top: 1.5rem;
+    margin-top: 2rem;
+}
+
 /* ================= App Grid Layout (Photo 2) ================= */
 .app-section {
     max-width: 72rem;
