@@ -3,55 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tri9T QA Generation Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Tri9T QA Engine</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
     <div class="app-container">
         <header>
-            <h1>QA Engine</h1>
-            <p>Automated test case generation & staleness detection</p>
+            <h1 class="text-8xl">QA Engine</h1>
+            <div class="section-header">
+                <div class="square-bullet"></div>
+                <p class="mono-label">Automated test case generation & staleness detection</p>
+            </div>
         </header>
 
+        <hr class="ultra">
+
         <main>
-            <div class="panel upload-panel">
-                <h2>1. Ingest Manual</h2>
+            <section id="ingest-section">
+                <div class="section-header">
+                    <div class="square-bullet"></div>
+                    <h2 class="text-4xl">1. Ingest Manual</h2>
+                </div>
                 <div class="upload-zone" id="upload-zone">
-                    <p>Drag & Drop PDF or Click to Upload</p>
+                    <p class="display-font" style="font-size: 2rem;">Drag & Drop PDF Document</p>
+                    <p class="mono-label" style="margin-top: 1rem;">Or click to browse files</p>
                     <input type="file" id="pdf-upload" accept="application/pdf" hidden>
                 </div>
                 <div id="upload-status" class="status-msg"></div>
-            </div>
+            </section>
 
-            <div class="panel search-panel">
-                <h2>2. Search Nodes</h2>
-                <div class="search-bar">
-                    <input type="text" id="search-input" placeholder="e.g. 'battery life'">
-                    <button id="search-btn">Search</button>
+            <hr class="thick">
+
+            <section id="search-section">
+                <div class="section-header">
+                    <div class="square-bullet"></div>
+                    <h2 class="text-4xl">2. Isolate Node</h2>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="search-input" placeholder="Enter keyword (e.g., 'battery')">
+                    <button id="search-btn">Query</button>
                 </div>
                 <ul id="search-results" class="result-list"></ul>
-            </div>
+            </section>
 
-            <div class="panel selection-panel">
-                <h2>3. Create Selection</h2>
-                <div class="selection-box">
-                    <input type="text" id="selection-name" placeholder="Selection Name (e.g. Battery Tests)">
-                    <button id="create-selection-btn" disabled>Create Selection</button>
+            <hr class="thick">
+
+            <section id="selection-section">
+                <div class="section-header">
+                    <div class="square-bullet"></div>
+                    <h2 class="text-4xl">3. Define Selection</h2>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="selection-name" placeholder="Selection Name">
+                    <button id="create-selection-btn" disabled>Initialize</button>
                 </div>
                 <div id="selection-status" class="status-msg"></div>
-            </div>
+            </section>
 
-            <div class="panel generate-panel">
-                <h2>4. Generate & View Tests</h2>
-                <button id="generate-btn" class="primary-btn" disabled>Generate Test Cases</button>
-                <button id="check-staleness-btn" class="secondary-btn" disabled>Check Staleness</button>
+            <hr class="ultra">
+
+            <section id="generation-section">
+                <div class="section-header">
+                    <div class="square-bullet"></div>
+                    <h2 class="text-4xl">4. Generate Tests</h2>
+                </div>
+                
+                <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+                    <button id="generate-btn" disabled>Execute LLM Generation</button>
+                    <button id="check-staleness-btn" disabled>Audit Staleness</button>
+                </div>
+                
                 <div id="generation-status" class="status-msg"></div>
                 
                 <div id="test-cases-container" class="cards-container">
-                    <!-- Test case cards will be injected here -->
+                    <!-- Test cases injected here -->
                 </div>
-            </div>
+            </section>
         </main>
     </div>
 

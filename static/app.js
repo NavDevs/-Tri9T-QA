@@ -1,6 +1,13 @@
 let selectedNodeId = null;
 let activeSelectionId = null;
 
+// Helper to set status message classes
+function setStatus(element, msg, type) {
+    element.textContent = msg;
+    element.className = 'status-msg'; // Reset
+    if (type) element.classList.add(`status-${type}`);
+}
+
 // --- 1. Upload Logic ---
 const uploadZone = document.getElementById('upload-zone');
 const fileInput = document.getElementById('pdf-upload');
@@ -32,25 +39,20 @@ fileInput.addEventListener('change', (e) => {
 });
 
 async function handleUpload(file) {
-    uploadStatus.textContent = 'Uploading and parsing...';
+    setStatus(uploadStatus, 'UPLOADING AND PARSING DOCUMENT...', 'loading');
     const formData = new FormData();
     formData.append('file', file);
 
     try {
-        const res = await fetch('/ingest', {
-            method: 'POST',
-            body: formData
-        });
+        const res = await fetch('/ingest', { method: 'POST', body: formData });
         const data = await res.json();
         if (res.ok) {
-            uploadStatus.textContent = `Success! Document Version ${data.version} active.`;
-            uploadStatus.style.color = 'var(--success)';
+            setStatus(uploadStatus, `DOCUMENT VERSION ${data.version} ACTIVE`, 'success');
         } else {
-            uploadStatus.textContent = `Error: ${data.detail}`;
-            uploadStatus.style.color = 'var(--danger)';
+            setStatus(uploadStatus, `SYSTEM FAULT: ${data.detail}`, 'error');
         }
     } catch (err) {
-        uploadStatus.textContent = 'Network error.';
+        setStatus(uploadStatus, 'NETWORK EXCEPTION', 'error');
     }
 }
 
@@ -63,21 +65,32 @@ searchBtn.addEventListener('click', async () => {
     const q = searchInput.value.trim();
     if (!q) return;
 
-    searchResults.innerHTML = '<li>Searching...</li>';
+    searchResults.innerHTML = '<li class="result-item mono-label">Querying database...</li>';
     try {
         const res = await fetch(`/search?q=${encodeURIComponent(q)}`);
         const nodes = await res.json();
         
         searchResults.innerHTML = '';
         if (nodes.length === 0) {
-            searchResults.innerHTML = '<li>No results found.</li>';
+            searchResults.innerHTML = '<li class="result-item mono-label">No records found.</li>';
             return;
         }
 
         nodes.forEach(node => {
             const li = document.createElement('li');
             li.className = 'result-item';
-            li.textContent = node.heading;
+            
+            const textSpan = document.createElement('span');
+            textSpan.className = 'display-font';
+            textSpan.textContent = node.heading;
+            
+            const idSpan = document.createElement('span');
+            idSpan.className = 'mono-label';
+            idSpan.textContent = node.logical_node_id;
+            
+            li.appendChild(textSpan);
+            li.appendChild(idSpan);
+            
             li.addEventListener('click', () => {
                 document.querySelectorAll('.result-item').forEach(el => el.classList.remove('selected'));
                 li.classList.add('selected');
@@ -87,7 +100,7 @@ searchBtn.addEventListener('click', async () => {
             searchResults.appendChild(li);
         });
     } catch (err) {
-        searchResults.innerHTML = '<li>Error fetching results.</li>';
+        searchResults.innerHTML = '<li class="result-item mono-label status-error">Fetch Error</li>';
     }
 });
 
@@ -102,7 +115,7 @@ createSelBtn.addEventListener('click', async () => {
     if (!selectedNodeId) return;
     const name = selNameInput.value.trim() || 'Custom Selection';
 
-    selStatus.textContent = 'Creating...';
+    setStatus(selStatus, 'INITIALIZING SELECTION...', 'loading');
     try {
         const res = await fetch('/selections', {
             method: 'POST',
@@ -112,13 +125,12 @@ createSelBtn.addEventListener('click', async () => {
         const data = await res.json();
         if (res.ok) {
             activeSelectionId = data.id;
-            selStatus.textContent = `Selection #${data.id} created successfully!`;
-            selStatus.style.color = 'var(--success)';
+            setStatus(selStatus, `SELECTION ${data.id} REGISTERED`, 'success');
             genBtn.disabled = false;
             staleBtn.disabled = false;
         }
     } catch (err) {
-        selStatus.textContent = 'Error creating selection.';
+        setStatus(selStatus, 'INITIALIZATION FAULT', 'error');
     }
 });
 
@@ -129,22 +141,19 @@ const genStatus = document.getElementById('generation-status');
 genBtn.addEventListener('click', async () => {
     if (!activeSelectionId) return;
     genBtn.disabled = true;
-    genStatus.textContent = 'Connecting to Groq API... this takes a few seconds.';
-    genStatus.style.color = 'var(--text-secondary)';
+    setStatus(genStatus, 'CONTACTING GROQ API (LLAMA-3.3-70B)', 'loading');
     
     try {
         const res = await fetch(`/generate?selection_id=${activeSelectionId}`, { method: 'POST' });
         const data = await res.json();
         if (res.ok) {
-            genStatus.textContent = `Generated successfully (Status: ${data.generation_status})`;
-            genStatus.style.color = 'var(--success)';
-            renderTestCases([data]); // wrap in array as check_staleness returns array
+            setStatus(genStatus, `GENERATION ${data.generation_status.toUpperCase()}`, 'success');
+            renderTestCases([data]); 
         } else {
-            genStatus.textContent = 'Generation failed.';
-            genStatus.style.color = 'var(--danger)';
+            setStatus(genStatus, 'GENERATION FAILED', 'error');
         }
     } catch (err) {
-        genStatus.textContent = 'API Error.';
+        setStatus(genStatus, 'API FAULT', 'error');
     } finally {
         genBtn.disabled = false;
     }
@@ -152,54 +161,63 @@ genBtn.addEventListener('click', async () => {
 
 staleBtn.addEventListener('click', async () => {
     if (!activeSelectionId) return;
-    genStatus.textContent = 'Checking staleness against latest document...';
+    setStatus(genStatus, 'AUDITING STALENESS', 'loading');
     try {
         const res = await fetch(`/test-cases?selection_id=${activeSelectionId}`);
         const data = await res.json();
         if (res.ok && data.length > 0) {
-            genStatus.textContent = 'Staleness fetched.';
+            setStatus(genStatus, 'AUDIT COMPLETE', 'success');
             renderTestCases(data);
         } else {
-            genStatus.textContent = 'No generations found for this selection.';
+            setStatus(genStatus, 'NO GENERATIONS FOUND', 'error');
         }
     } catch (err) {
-        genStatus.textContent = 'Error fetching test cases.';
+        setStatus(genStatus, 'AUDIT FAULT', 'error');
     }
 });
 
 function renderTestCases(generations) {
     testCasesContainer.innerHTML = '';
     
-    // Display the most recent generation
     const gen = generations[generations.length - 1];
     const isStale = gen.staleness ? gen.staleness.is_stale : false;
     
+    // Stale Alert using inversion and heavy lines (no colors)
     if (isStale) {
         const staleAlert = document.createElement('div');
-        staleAlert.className = 'status-msg';
-        staleAlert.style.color = 'var(--danger)';
-        staleAlert.style.fontWeight = 'bold';
-        staleAlert.style.marginBottom = '1rem';
-        staleAlert.textContent = '⚠️ WARNING: Underlying requirement has changed! Test cases may be invalid.';
-        testCasesContainer.appendChild(staleAlert);
+        staleAlert.className = 'stale-state';
         
-        // Show diff
+        const warning = document.createElement('h3');
+        warning.className = 'display-font';
+        warning.style.fontSize = '2.5rem';
+        warning.textContent = 'REQUIREMENT ALTERED';
+        
+        const sub = document.createElement('p');
+        sub.className = 'mono-label';
+        sub.style.color = 'inherit';
+        sub.textContent = 'TEST CASES BELOW MAY BE INVALID DUE TO UPSTREAM DOCUMENT MODIFICATION';
+        
+        staleAlert.appendChild(warning);
+        staleAlert.appendChild(sub);
+        
         const diffText = gen.staleness.details.map(d => d.diff).join('\n');
         if (diffText) {
             const diffBox = document.createElement('div');
             diffBox.className = 'diff-box';
             diffBox.textContent = diffText;
-            testCasesContainer.appendChild(diffBox);
+            staleAlert.appendChild(diffBox);
         }
+        
+        testCasesContainer.appendChild(staleAlert);
     }
 
     gen.parsed_test_cases.forEach(tc => {
         const card = document.createElement('div');
-        card.className = `card ${isStale ? 'stale' : ''}`;
+        card.className = `test-card ${isStale ? 'stale-card-context' : ''}`;
         
-        let html = `<h3>${tc.title} ${isStale ? '<span class="stale-badge">STALE</span>' : ''}</h3>`;
+        let html = `<h3>${tc.title} ${isStale ? '<span class="stale-badge">[ STALE ]</span>' : ''}</h3>`;
         html += `<ul>${tc.steps.map(s => `<li>${s}</li>`).join('')}</ul>`;
-        html += `<div class="expected">Expected: ${tc.expected_result}</div>`;
+        html += `<div class="expected-result">Expected: ${tc.expected_result}</div>`;
         
         card.innerHTML = html;
         testCasesContainer.appendChild(card);
