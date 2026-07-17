@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tri9T QA Generation Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>QA Engine</h1>
+            <p>Automated test case generation & staleness detection</p>
+        </header>
+
+        <main>
+            <div class="panel upload-panel">
+                <h2>1. Ingest Manual</h2>
+                <div class="upload-zone" id="upload-zone">
+                    <p>Drag & Drop PDF or Click to Upload</p>
+                    <input type="file" id="pdf-upload" accept="application/pdf" hidden>
+                </div>
+                <div id="upload-status" class="status-msg"></div>
+            </div>
+
+            <div class="panel search-panel">
+                <h2>2. Search Nodes</h2>
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="e.g. 'battery life'">
+                    <button id="search-btn">Search</button>
+                </div>
+                <ul id="search-results" class="result-list"></ul>
+            </div>
+
+            <div class="panel selection-panel">
+                <h2>3. Create Selection</h2>
+                <div class="selection-box">
+                    <input type="text" id="selection-name" placeholder="Selection Name (e.g. Battery Tests)">
+                    <button id="create-selection-btn" disabled>Create Selection</button>
+                </div>
+                <div id="selection-status" class="status-msg"></div>
+            </div>
+
+            <div class="panel generate-panel">
+                <h2>4. Generate & View Tests</h2>
+                <button id="generate-btn" class="primary-btn" disabled>Generate Test Cases</button>
+                <button id="check-staleness-btn" class="secondary-btn" disabled>Check Staleness</button>
+                <div id="generation-status" class="status-msg"></div>
+                
+                <div id="test-cases-container" class="cards-container">
+                    <!-- Test case cards will be injected here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

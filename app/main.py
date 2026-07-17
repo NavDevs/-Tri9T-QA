@@ -12,11 +12,19 @@ from app.parser import parse_pdf
 from app.versioning import match_versions, generate_diff
 from app.llm import generate_test_cases
 from app.nosql import insert_generation, get_generations_by_selection, get_generations_by_node, get_generation_by_id
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from app.staleness import check_staleness
 
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="CT-200 QA Generator")
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+@app.get("/")
+def serve_frontend():
+    return FileResponse("static/index.html")
 
 def build_tree_from_db(db_nodes):
     node_dict = {n.id: {
