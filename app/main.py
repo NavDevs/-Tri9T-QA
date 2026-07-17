@@ -165,6 +165,10 @@ def create_selection(req: SelectionRequest, db: Session = Depends(get_db)):
     if len(nodes) != len(req.node_ids):
         raise HTTPException(status_code=400, detail="Some nodes not found")
         
+    existing = db.query(Selection).filter(Selection.name == req.name).first()
+    if existing:
+        raise HTTPException(status_code=400, detail="A selection with this name already exists. Please choose a different name.")
+        
     sel = Selection(name=req.name)
     db.add(sel)
     db.flush() # get id
