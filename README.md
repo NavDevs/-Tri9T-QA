@@ -1,6 +1,6 @@
 # Tri9T AI QA Engine
 
-**Live Demo:** [https://tri9t-qa.onrender.com/](https://tri9t-qa.onrender.com/)
+
 
 An AI-powered Quality Assurance (QA) Engine designed to process complex medical device manuals and dynamically generate audit-ready test cases. Built for the AffineSurge Internship Assignment.
 
